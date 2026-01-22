@@ -340,9 +340,9 @@ function App() {
   }
 
   const getLunaPhoto = (score) => {
-    if (score >= 70) return '/luna-happy.jpg'
-    if (score >= 50) return '/luna-okay.jpg'
-    return '/luna-sad.jpg'
+    if (score >= 70) return '/luna-happy.jpeg'
+    if (score >= 50) return '/luna-okay.jpeg'
+    return '/luna-sleepy.jpeg'
   }
 
   const getImportanceColor = (importance) => {
