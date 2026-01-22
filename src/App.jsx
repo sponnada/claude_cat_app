@@ -339,6 +339,12 @@ function App() {
     return { text: 'Urgent care needed!', color: '#e17055' }
   }
 
+  const getLunaPhoto = (score) => {
+    if (score >= 70) return '/luna-happy.jpg'
+    if (score >= 50) return '/luna-okay.jpg'
+    return '/luna-sad.jpg'
+  }
+
   const getImportanceColor = (importance) => {
     switch (importance) {
       case 'critical': return '#e74c3c'
@@ -357,25 +363,34 @@ function App() {
 
       {/* Luna's Wellbeing Dashboard */}
       <div className="wellbeing-dashboard">
-        <div className="wellbeing-score">
-          <span className="wellbeing-emoji">{getWellbeingEmoji(wellbeingScore)}</span>
-          <div className="wellbeing-details">
+        <div className="luna-photo-container">
+          <img
+            src={getLunaPhoto(wellbeingScore)}
+            alt="Luna"
+            className="luna-photo"
+          />
+          <div className="luna-mood-badge" style={{ background: getWellbeingStatus(wellbeingScore).color }}>
+            {getWellbeingEmoji(wellbeingScore)}
+          </div>
+        </div>
+        <div className="wellbeing-info">
+          <div className="wellbeing-score">
             <div className="wellbeing-number">{Math.round(wellbeingScore)}%</div>
             <div className="wellbeing-label" style={{ color: getWellbeingStatus(wellbeingScore).color }}>
               {getWellbeingStatus(wellbeingScore).text}
             </div>
           </div>
+          <div className="wellbeing-bar">
+            <div
+              className="wellbeing-fill"
+              style={{
+                width: `${wellbeingScore}%`,
+                background: getWellbeingStatus(wellbeingScore).color
+              }}
+            />
+          </div>
+          <p className="wellbeing-subtitle">Luna's Wellbeing (based on last 7 days)</p>
         </div>
-        <div className="wellbeing-bar">
-          <div
-            className="wellbeing-fill"
-            style={{
-              width: `${wellbeingScore}%`,
-              background: getWellbeingStatus(wellbeingScore).color
-            }}
-          />
-        </div>
-        <p className="wellbeing-subtitle">Luna's Wellbeing (based on last 7 days)</p>
       </div>
 
       {/* Tab Navigation */}
